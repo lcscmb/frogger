@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=_x\ _y\ _cor
+comment0.target=Bola(double,\ double,\ Cor)
+comment1.params=t
+comment1.target=void\ desenhar(Tela)
+comment2.params=x\ y\ i\ Altura\ Largura
+comment2.target=boolean\ testaMovimento(double,\ double,\ int,\ int,\ int)
+comment3.params=dt\ Altura
+comment3.target=void\ cima(double,\ int)
+comment4.params=dt\ Altura
+comment4.target=void\ baixo(double,\ int)
+comment5.params=dt\ Largura
+comment5.target=void\ direita(double,\ int)
+comment6.params=dt\ Largura
+comment6.target=void\ esquerda(double,\ int)
+numComments=7

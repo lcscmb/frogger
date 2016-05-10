@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=_x\ _y\ _largura\ _vx
+comment0.target=Carro(double,\ double,\ int,\ double)
+comment1.params=t
+comment1.target=void\ desenhar(Tela)
+comment2.params=dt\ telaLargura
+comment2.target=void\ mover(double,\ int)
+numComments=3
