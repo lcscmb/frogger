@@ -86,14 +86,14 @@ public class Jogo {
         
         for(int i = 0 ; i < 9 ; i++){
             Hitbox = new Hitbox(sapo.x, sapo.y, car[i].x, car[i].y, car[i].largura);
-            if((Hitbox.testaColisao(sapo.x, sapo.y, car[i].x , car[i].y, car[i].largura)) == true){
+            if(Hitbox.testaColisao() == true){
                 vida --;
                 sapo = new Bola(getLargura()/2,getAltura() - 50, new Cor(0, 255, 0));
                 if(vida == 0) sapo.gameover = true;
             }
         }
         
-        //System.out.println(sapo.x);
+        //System.out.println(sapo.y);
     }
     
     public void desenhar(Tela tela) {

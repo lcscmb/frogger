@@ -6,7 +6,7 @@ public class Bola {
     static double vy = 2;
     int val = 0;
     Cor cor;
-    int raio = 50;
+    int raio = 45;
     boolean marca2 = false, gameover = false;
     int moveLado = 0;
     
