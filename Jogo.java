@@ -38,33 +38,49 @@ public class Jogo {
         for(int i = 0 ; i < 9 ; i++){
             car[i].mover(dt, getLargura());
         }
-        if(sapo.val == 1 && sapo.marca2 == true){
+        if(sapo.val == 1 && sapo.marca2 == true && sapo.moveLado == 0 ){
             if(marca == true){
                 sapo.mark = sapo.y;
                 marca = false;
             }
             sapo.cima(dt, getAltura());
         }
-        else if(sapo.val == 2 && sapo.marca2 == true){
+        else if(sapo.val == 2 && sapo.marca2 == true && sapo.moveLado == 0){
             if(marca == true){
                 sapo.mark = sapo.y;
                 marca = false;
             }
             sapo.baixo(dt, getAltura());
         }
-        else if(sapo.val == 3 && sapo.marca2 == true){
+        else if(sapo.val == 3 && sapo.marca2 == true && sapo.moveLado == 0){
             if(marca == true){
                 sapo.mark = sapo.x;
                 marca = false;
             }
             sapo.esquerda(dt, getLargura());
         }
-        else if(sapo.val == 4 && sapo.marca2 ==true){
+        else if(sapo.val == 4 && sapo.marca2 ==true && sapo.moveLado == 0){
             if(marca == true){
                 sapo.mark = sapo.x;
                 marca = false;
             }
             sapo.direita(dt, getLargura());
+        }
+        
+        else if(sapo.moveLado > 0){
+            if(sapo.x > 850){
+                sapo.moveLado = 2;
+                sapo.x = -50;
+            }
+            sapo.movimenta(dt, getLargura());
+        }
+        
+        else if(sapo.moveLado < 0){
+            if(sapo.x < - 50){
+                sapo.moveLado = -2;
+                sapo.x = 850;
+            }
+            sapo.movimenta(dt, getLargura());
         }
 
         
@@ -72,25 +88,30 @@ public class Jogo {
             Hitbox = new Hitbox(sapo.x, sapo.y, car[i].x, car[i].y, car[i].largura);
             if((Hitbox.testaColisao(sapo.x, sapo.y, car[i].x , car[i].y, car[i].largura)) == true){
                 vida --;
+                sapo = new Bola(getLargura()/2,getAltura() - 50, new Cor(0, 255, 0));
+                if(vida == 0) sapo.gameover = true;
             }
         }
         
-        System.out.println(sapo.y);
+        //System.out.println(sapo.x);
     }
     
     public void desenhar(Tela tela) {
         for(int i = 0 ; i < 9 ; i++){
             car[i].desenhar(tela);
         }
-        tela.retangulo(0, getAltura()-600, getLargura(), 100, new Cor(255, 255, 255));
-        tela.retangulo(0, 500, getLargura(), 100, new Cor(255, 255, 255));
+        tela.retangulo(0, getAltura()-600, getLargura(), 100, new Cor(255,228,225));
+        tela.retangulo(0, 500, getLargura(), 100, new Cor(255,228,225));
         sapo.desenhar(tela);
-        tela.texto("" + vida, getLargura() - 100, getAltura() - 35, 60, new Cor(255, 0, 0));
-        tela.texto("" + pt, 100, getAltura() - 35, 60, new Cor(255, 0, 0));
+        tela.texto("" + vida, getLargura() - 100, getAltura() - 35, 60, new Cor(0,139,139));
+        tela.texto("" + pt, 100, getAltura() - 35, 60, new Cor(0,139,139));
+        if(sapo.gameover){
+            tela.texto("GAME OVER", 65, getAltura()/2, 100, new Cor(178,34,34)); 
+        }
     }
     
     public void tecla(String tecla) {
-        if(sapo.marca2 == false){
+        if(sapo.marca2 == false && sapo.gameover == false && sapo.moveLado == 0){
             if(tecla.equals("w")){
                 sapo.val = 1;
                 if(sapo.testaMovimento(sapo.x, sapo.y, sapo.val, getAltura(), getLargura()) == true){
@@ -108,11 +129,17 @@ public class Jogo {
                 if(sapo.testaMovimento(sapo.x, sapo.y, sapo.val, getAltura(), getLargura()) == true){
                     marca = sapo.marca2 = true;
                 }
+                else{
+                    sapo.moveLado = -1;
+                }
             }
             if(tecla.equals("d")){
                 sapo.val = 4;
                 if(sapo.testaMovimento(sapo.x, sapo.y, sapo.val, getAltura(), getLargura()) == true){
                     marca = sapo.marca2 = true;
+                }
+                else{
+                    sapo.moveLado = 1;
                 }
             }
         }

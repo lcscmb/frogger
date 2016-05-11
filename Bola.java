@@ -7,7 +7,8 @@ public class Bola {
     int val = 0;
     Cor cor;
     int raio = 50;
-    boolean marca2 = false;
+    boolean marca2 = false, gameover = false;
+    int moveLado = 0;
     
     public Bola(double _x, double _y, Cor _cor) {
         x = _x;
@@ -68,4 +69,29 @@ public class Bola {
             marca2 = false;
         }
     }
+    
+    public void movimenta(double dt, int Largura){
+        if(moveLado == 1){
+           x += Largura * (dt/vx);
+        }
+        else if(moveLado == 2){
+           x += Largura * (dt/vx);
+           if(x >= 100){
+               x = 100;
+               moveLado = 0;
+            }
+        }
+        
+        else if(moveLado == -1){
+            x -= Largura * (dt/vx);
+        }
+        
+        else if(moveLado == -2){
+            x -= Largura * (dt/vx);
+            if(x <= 700){
+                x = 700;
+                moveLado = 0;
+            }
+        }
+    }    
 }
